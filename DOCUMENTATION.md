@@ -174,3 +174,11 @@ npm run start:prod
 2. **Swagger OpenAPI Documentation**:
    - 📚 **URL**: `http://localhost:3000/docs`
    - Interactive OpenAPI dashboard for endpoint testing and API export.
+
+---
+
+## 📩 Buyer Support & Contact Information
+
+For buyer support, technical assistance, custom features, or project inquiries:
+
+* 📧 **Support Email**: [arafatnayem1@gmail.com](mailto:arafatnayem1@gmail.com)

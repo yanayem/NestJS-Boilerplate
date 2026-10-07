@@ -1,177 +1,173 @@
-# Fullstack SaaS Boilerplate (NestJS + Next.js) 🚀
+# 🚀 NestJS + MongoDB Production SaaS Boilerplate — Commercial Starter Kit
 
-A complete, production-ready Boilerplate for building scalable SaaS applications. This monorepo contains a **NestJS + MongoDB** backend API and a **Next.js + Tailwind CSS** frontend — all served from a single server.
+[![NestJS](https://img.shields.io/badge/NestJS-v10-red.svg)](https://nestjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-green.svg)](https://mongoosejs.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/License-Commercial-brightgreen.svg)]()
 
----
-
-## 🌟 Features
-
-### Backend (NestJS)
-- **JWT Authentication**: Access & Refresh Tokens with Bcrypt password hashing
-- **Social Login**: Google OAuth integration
-- **Role-Based Access Control (RBAC)**: Admin, Manager, User roles
-- **MongoDB (Mongoose)**: User schema with Soft Delete
-- **Rate Limiting**: DDoS protection via `@nestjs/throttler`
-- **Helmet & CORS**: Security headers configured
-- **File Upload**: AWS S3 Upload Module
-- **Email Service**: Nodemailer integration
-- **Payment Gateway**: Stripe payment intents & webhook handling
-- **Swagger API Docs**: Interactive API documentation at `/docs`
-- **Global Exception Handling**: Unified error responses
-- **Input Validation**: `class-validator` with `ValidationPipe`
-
-### Frontend (Next.js + Tailwind CSS)
-- **Landing Page**: Professional hero section with feature showcase
-- **Login Page**: Email/password + Google OAuth sign-in
-- **Register Page**: Full registration with validation
-- **Dashboard**: Stats overview, quick actions, recent activity
-- **Profile Page**: View & edit profile, change password
-- **User Management**: Admin-only user table with delete (RBAC)
-- **File Upload Page**: Drag & drop file uploader with S3 integration
-- **Payments Page**: Stripe payment intent creation & history
-- **Auth Protection**: JWT-based route guarding
-- **Responsive Design**: Works on desktop, tablet, and mobile
+> **The Ultimate Production-Ready NestJS + MongoDB SaaS Boilerplate.**  
+> Designed for developers, startups, and agencies who want to launch commercial SaaS products or web applications in minutes rather than months.
 
 ---
 
-## 📂 Folder Structure
+## 🌟 Why Buy This Item?
 
-```
-NestJS Boilerplate/
-├── frontend/                       # Next.js UI Application
-│   └── src/
-│       ├── app/
-│       │   ├── page.tsx            # Landing Page
-│       │   ├── login/page.tsx      # Login Page
-│       │   ├── register/page.tsx   # Register Page
-│       │   └── dashboard/
-│       │       ├── layout.tsx      # Dashboard Layout (Navbar + Sidebar)
-│       │       ├── page.tsx        # Dashboard Home
-│       │       ├── profile/        # Profile Page
-│       │       ├── users/          # Admin User Management
-│       │       ├── upload/         # File Upload Page
-│       │       └── payments/       # Payments Page
-│       ├── components/
-│       │   ├── Navbar.tsx          # Top Navigation Bar
-│       │   └── Sidebar.tsx         # Side Navigation Menu
-│       └── utils/
-│           └── api.ts              # Axios instance with JWT interceptor
-│
-├── src/                            # NestJS Backend API
-│   ├── main.ts                     # Entry point (Helmet, CORS, Swagger)
-│   ├── app.module.ts               # Root module
-│   ├── config/configuration.ts     # Environment config loader
-│   ├── common/                     # Guards, Decorators, Filters, Interceptors
-│   └── modules/
-│       ├── auth/                   # JWT + Google OAuth strategies
-│       ├── users/                  # User CRUD + Mongoose schema
-│       ├── mail/                   # Email service (Nodemailer)
-│       ├── upload/                 # AWS S3 file upload
-│       └── payment/                # Stripe payment handling
-│
-├── .env / .env.example             # Environment variables
-├── package.json                    # Root scripts & dependencies
-└── README.md                       # This file
+Saving hundreds of development hours, this boilerplate comes pre-built with commercial-grade features, rock-solid security, an interactive frontend UI dashboard, and full modular architecture.
+
+### 🔑 Key Commercial Highlights:
+* ⚡ **Unified Single Server Architecture**: Serves both the interactive Web Dashboard and REST API endpoints from a single lightweight NestJS process.
+* 🛡️ **Enterprise Security**: Built-in **JWT Access Token & Refresh Token** system with hashed tokens in DB, **Role-Based Access Control (RBAC)**, **Helmet Security Headers**, and **Rate Limiting (DDoS Protection)**.
+* ☁️ **AWS S3 Cloud Storage**: Pre-configured file upload module with S3 bucket integration and public URL generation.
+* 💳 **Stripe Payment Gateway**: Complete Stripe payment intent creation and webhook listener for handling checkout events.
+* 📧 **Nodemailer Email Service**: Asynchronous welcome email and password reset dispatching.
+* 🎨 **Built-In Interactive Dashboard UI**: Modern Tailwind CSS interface for instant live testing of all API features.
+* 📚 **Swagger OpenAPI Docs**: Fully interactive API documentation available at `/docs`.
+
+---
+
+## 📂 Package Folder Structure
+
+```text
+nestjs-saas-boilerplate/
+├── src/
+│   ├── config/                 # Centralized Configuration (App, DB, Mail, AWS, Stripe)
+│   ├── common/                 # Shared Utilities across all modules
+│   │   ├── decorators/         # Custom Decorators (@GetUser, @Roles)
+│   │   ├── enums/              # Role Enums (ADMIN, MANAGER, USER)
+│   │   ├── filters/            # Global Exception Filters
+│   │   ├── guards/             # JWT Auth, JWT Refresh & Roles Guards
+│   │   └── interceptors/       # Response Transform Interceptors
+│   ├── modules/                # Core Business Logic Modules
+│   │   ├── auth/               # Auth Controllers, Services & Passport Strategies
+│   │   ├── users/              # User CRUD, Schemas & Soft-Delete logic
+│   │   ├── upload/             # AWS S3 Upload Module
+│   │   ├── mail/               # Nodemailer Email Dispatcher
+│   │   └── payment/            # Stripe Payment Intent & Webhook Handling
+│   ├── app.controller.ts       # System Health Check Endpoint
+│   ├── app.module.ts           # Root Module with Throttler & Static File Serving
+│   └── main.ts                 # Application Entry Point
+├── public/
+│   └── index.html              # Interactive Tailwind CSS Web Dashboard
+├── .env.example                # Pre-configured Environment Sample
+├── nest-cli.json               # NestJS CLI Configuration
+├── tsconfig.json               # TypeScript Compiler Configuration
+└── package.json                # Project Dependencies & Scripts
 ```
 
 ---
 
-## 🛠️ Prerequisites
+## 🛠️ Requirements & Quick Start
 
-- **Node.js**: v18 or later
-- **MongoDB**: Local instance or MongoDB Atlas URL
+### Prerequisites:
+- **Node.js**: `v18.x` or higher
+- **MongoDB**: Local MongoDB instance or MongoDB Atlas cluster URL
 
----
-
-## 🚀 Getting Started
-
-### 1. Install Dependencies
+### Step 1: Install Dependencies
+Extract the downloaded package and run:
 ```bash
-npm run install:all
+npm install
 ```
 
-### 2. Configure Environment
+### Step 2: Configure Environment Variables
+Copy `.env.example` to `.env`:
 ```bash
 cp .env.example .env
 ```
 
-**Environment Variables:**
+Set your configuration values in `.env`:
+```env
+# Application Settings
+PORT=3000
+NODE_ENV=development
+APP_NAME="SaaS Boilerplate"
+API_PREFIX=api/v1
 
-| Key | Description |
-|-----|-------------|
-| `PORT` | Server port (default: 3000) |
-| `MONGODB_URI` | MongoDB connection string |
-| `JWT_ACCESS_SECRET` | Secret for signing access tokens |
-| `JWT_REFRESH_SECRET` | Secret for signing refresh tokens |
-| `JWT_ACCESS_EXPIRATION` | Access token expiry (e.g., `15m`) |
-| `JWT_REFRESH_EXPIRATION` | Refresh token expiry (e.g., `7d`) |
-| `AWS_REGION` | AWS region for S3 |
-| `AWS_ACCESS_KEY_ID` | AWS access key |
-| `AWS_SECRET_ACCESS_KEY` | AWS secret key |
-| `AWS_S3_BUCKET` | S3 bucket name |
-| `MAIL_HOST` | SMTP host (e.g., smtp.mailtrap.io) |
-| `MAIL_PORT` | SMTP port |
-| `MAIL_USER` | SMTP username |
-| `MAIL_PASS` | SMTP password |
-| `MAIL_FROM` | Default sender email |
-| `STRIPE_SECRET_KEY` | Stripe secret key |
-| `STRIPE_WEBHOOK_SECRET` | Stripe webhook secret |
+# MongoDB Connection
+MONGO_URI=mongodb://localhost:27017/nestjs-saas-db
 
-### 3. Run the Project
-```bash
-npm run build       # Builds frontend + backend
-npm run start:dev   # Starts the server (frontend + API on port 3000)
+# JWT Token Secrets
+JWT_SECRET=super_secret_jwt_access_key
+JWT_EXPIRATION=15m
+JWT_REFRESH_SECRET=super_secret_jwt_refresh_key
+JWT_REFRESH_EXPIRATION=7d
+
+# Nodemailer SMTP Configuration
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USER=your_smtp_username
+MAIL_PASS=your_smtp_password
+MAIL_FROM="SaaS App <no-reply@saasapp.com>"
+
+# AWS S3 Storage Credentials
+AWS_REGION=us-east-1
+AWS_ACCESS_KEY_ID=your_aws_access_key_id
+AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
+AWS_S3_BUCKET_NAME=your_s3_bucket_name
+
+# Stripe Payment Gateway
+STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=whsec_your_stripe_webhook_secret
+
+# Rate Limiting (DDoS Protection)
+THROTTLE_TTL=60
+THROTTLE_LIMIT=100
 ```
 
-- **UI**: `http://localhost:3000`
-- **API**: `http://localhost:3000/api/v1`
-- **Swagger Docs**: `http://localhost:3000/docs`
+### Step 3: Run the Application
+```bash
+# Start in Development Mode with Hot Reload
+npm run start:dev
+
+# Production Build & Start
+npm run build
+npm run start:prod
+```
 
 ---
 
-## 📡 API Endpoints
+## 🌐 Live Demo & Interactive Surfaces
 
-### Auth
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/v1/auth/register` | Register a new user |
-| POST | `/api/v1/auth/login` | Login & get tokens |
-| POST | `/api/v1/auth/refresh` | Refresh access token |
-| GET | `/api/v1/auth/google` | Google OAuth login |
-
-### Users (JWT Required)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/v1/users/me` | Get current user profile |
-| GET | `/api/v1/users` | List all users (Admin/Manager) |
-| POST | `/api/v1/users` | Create user (Admin) |
-| PATCH | `/api/v1/users/:id` | Update user (Admin) |
-| DELETE | `/api/v1/users/:id` | Soft delete user (Admin) |
-
-### Upload (JWT Required)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/v1/upload` | Upload file to S3 |
-
-### Payment (JWT Required)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/v1/payment/create-intent` | Create Stripe payment intent |
-| POST | `/api/v1/payment/webhook` | Stripe webhook listener |
+Once the application is running:
+- **Interactive Web UI Dashboard**: `http://localhost:3000/`
+- **Swagger OpenAPI Dashboard**: `http://localhost:3000/docs`
+- **System Health Check Endpoint**: `http://localhost:3000/api/v1`
 
 ---
 
-## 💡 Customization
+## 📌 REST API Endpoint Directory
 
-- **Add Roles**: Edit `src/common/enums/role.enum.ts`
-- **Email Templates**: Customize `src/modules/mail/mail.service.ts`
-- **Switch to Cloudinary**: Replace S3 logic in `src/modules/upload/upload.service.ts`
-- **Add Pages**: Create new folders in `frontend/src/app/dashboard/`
+| Method | Endpoint | Access Control | Description |
+| :--- | :--- | :--- | :--- |
+| **POST** | `/api/v1/auth/register` | Public | Register new user & return tokens |
+| **POST** | `/api/v1/auth/login` | Public | Authenticate user & return tokens |
+| **POST** | `/api/v1/auth/refresh` | Public (Refresh Token) | Generate new access token |
+| **POST** | `/api/v1/auth/logout` | Bearer JWT | Invalidate user refresh token |
+| **GET** | `/api/v1/users/me` | Bearer JWT | Retrieve current user profile |
+| **GET** | `/api/v1/users` | Admin & Manager | List all non-deleted users |
+| **GET** | `/api/v1/users/:id` | Bearer JWT | Retrieve user by ID |
+| **PATCH** | `/api/v1/users/:id` | Bearer JWT / Self | Update user information |
+| **DELETE**| `/api/v1/users/:id` | Admin Only | Soft delete user (`isDeleted: true`) |
+| **POST** | `/api/v1/upload` | Bearer JWT | Upload file to AWS S3 bucket |
+| **POST** | `/api/v1/payment/create-intent` | Bearer JWT | Create Stripe payment intent |
+| **POST** | `/api/v1/payment/webhook` | Public | Stripe asynchronous webhook listener |
 
 ---
 
-## 📄 License
+## 📦 What's Included in the Download Package?
 
-MIT — use it for personal or commercial projects.
+1. **Complete TypeScript Source Code** (Clean, well-commented, modular)
+2. **Interactive Frontend Web Dashboard** (`public/index.html`)
+3. **Pre-configured Docker & Deployment Setup**
+4. **Comprehensive Documentation** (`DOCUMENTATION.md`)
+5. **Free Lifetime Updates**
 
-Happy Coding! 💻
+---
+
+## 📩 Buyer Support & Contact Information
+
+If you need help setting up the boilerplate, expanding features, reporting bugs, or hiring for custom SaaS project development, please reach out directly:
+
+* 📧 **Email**: [arafatnayem1@gmail.com](mailto:arafatnayem1@gmail.com)
+* 💼 **CodeCanyon Profile**: Contact via item support tab or email.
+
+*Thank you for purchasing! If you like this boilerplate, please leave a 5-star rating on CodeCanyon!* ⭐⭐⭐⭐⭐
