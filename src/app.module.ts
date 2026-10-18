@@ -3,10 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 import configuration from './config/configuration';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { MailModule } from './modules/mail/mail.module';
@@ -36,15 +36,17 @@ import { PaymentModule } from './modules/payment/payment.module';
         },
       ],
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'out'),
+      exclude: ['/api/(.*)'],
+    }),
     AuthModule,
     UsersModule,
     MailModule,
     UploadModule,
     PaymentModule,
   ],
-  controllers: [AppController],
   providers: [
-    AppService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

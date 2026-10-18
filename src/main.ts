@@ -12,9 +12,6 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const configService = app.get(ConfigService);
 
-  // Serve static files from 'public' directory
-  app.useStaticAssets(join(__dirname, "..", "public"));
-
   // Security Headers
   app.use(
     helmet({

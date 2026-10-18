@@ -1,4 +1,8 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
+  "compilerOptions": {
+    "noEmit": false,
+    "module": "commonjs"
+  },
+  "exclude": ["node_modules", "dist", "test", "**/*spec.ts", "src/app/**/*", "src/components/**/*", "src/utils/**/*"]
 }

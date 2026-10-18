@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function HomePage() {
   const features = [
-    { icon: '🔐', title: 'Authentication', desc: 'JWT Access & Refresh Tokens, Google OAuth, Role-Based Access Control' },
+    { icon: '🔒', title: 'Authentication', desc: 'JWT Access & Refresh Tokens, Google OAuth, Role-Based Access Control' },
     { icon: '📁', title: 'File Upload', desc: 'AWS S3 integration for seamless file and image uploads' },
     { icon: '💳', title: 'Payments', desc: 'Stripe payment gateway with webhook handling' },
     { icon: '📧', title: 'Email Service', desc: 'Nodemailer integration for verification and password reset' },
