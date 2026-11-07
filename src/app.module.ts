@@ -31,8 +31,8 @@ import { PaymentModule } from './modules/payment/payment.module';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => [
         {
-          ttl: configService.get<number>('throttle.ttl') * 1000,
-          limit: configService.get<number>('throttle.limit'),
+          ttl: (configService.get<number>('throttle.ttl') || 60) * 1000,
+          limit: configService.get<number>('throttle.limit') || 100,
         },
       ],
     }),

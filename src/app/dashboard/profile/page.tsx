@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import api from '@/utils/api';
+import { User, CheckCircle2, Clock, AlertCircle, KeyRound } from 'lucide-react';
 
 export default function ProfilePage() {
   const [user, setUser] = useState<any>(null);
@@ -48,11 +49,24 @@ export default function ProfilePage() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="text-2xl font-bold text-gray-900">My Profile</h1>
+      <div className="flex items-center gap-2">
+        <User className="w-6 h-6 text-indigo-600" />
+        <h1 className="text-2xl font-bold text-gray-900">My Profile</h1>
+      </div>
       <p className="mt-1 text-sm text-gray-500">Manage your account settings</p>
 
-      {msg && <div className="mt-4 p-3 text-sm text-green-700 bg-green-50 rounded-lg border border-green-100">{msg}</div>}
-      {error && <div className="mt-4 p-3 text-sm text-red-700 bg-red-50 rounded-lg border border-red-100">{error}</div>}
+      {msg && (
+        <div className="mt-4 p-3 text-sm text-green-700 bg-green-50 rounded-lg border border-green-100 flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0" />
+          <span>{msg}</span>
+        </div>
+      )}
+      {error && (
+        <div className="mt-4 p-3 text-sm text-red-700 bg-red-50 rounded-lg border border-red-100 flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
+          <span>{error}</span>
+        </div>
+      )}
 
       {/* Info Card */}
       <div className="bg-white p-6 rounded-xl border border-gray-100 mt-6">
@@ -65,8 +79,9 @@ export default function ProfilePage() {
             <p className="text-sm text-gray-500">{user.email}</p>
             <div className="flex gap-2 mt-1">
               <span className="px-2 py-0.5 text-xs font-medium bg-indigo-50 text-indigo-700 rounded-full">{user.role}</span>
-              <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${user.isVerified ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700'}`}>
-                {user.isVerified ? '✓ Verified' : '⏳ Unverified'}
+              <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full ${user.isVerified ? 'bg-green-50 text-green-700' : 'bg-amber-50 text-amber-700'}`}>
+                {user.isVerified ? <CheckCircle2 className="w-3 h-3" /> : <Clock className="w-3 h-3" />}
+                <span>{user.isVerified ? 'Verified' : 'Unverified'}</span>
               </span>
             </div>
           </div>
@@ -92,7 +107,10 @@ export default function ProfilePage() {
 
       {/* Change Password */}
       <div className="bg-white p-6 rounded-xl border border-gray-100 mt-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Change Password</h3>
+        <div className="flex items-center gap-2 mb-4">
+          <KeyRound className="w-5 h-5 text-gray-700" />
+          <h3 className="text-lg font-semibold text-gray-900">Change Password</h3>
+        </div>
         <form onSubmit={handlePassword} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>

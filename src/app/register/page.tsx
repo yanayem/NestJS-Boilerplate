@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
 import api from '@/utils/api';
+import { Rocket, AlertCircle } from 'lucide-react';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -41,14 +42,20 @@ export default function RegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-blue-50 px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/" className="text-2xl font-bold text-indigo-600">🚀 SaaS Boilerplate</Link>
+          <Link href="/" className="inline-flex items-center gap-2 text-2xl font-bold text-indigo-600">
+            <Rocket className="w-7 h-7" />
+            <span>SaaS Boilerplate</span>
+          </Link>
           <h2 className="mt-4 text-2xl font-bold text-gray-900">Create your account</h2>
           <p className="mt-1 text-sm text-gray-500">Start building your SaaS app today</p>
         </div>
 
         <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
           {error && (
-            <div className="mb-4 p-3 text-sm text-red-700 bg-red-50 rounded-lg border border-red-100">{error}</div>
+            <div className="mb-4 p-3 text-sm text-red-700 bg-red-50 rounded-lg border border-red-100 flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
+              <span>{error}</span>
+            </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import api from '@/utils/api';
+import { CreditCard, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export default function PaymentsPage() {
   const [amount, setAmount] = useState('');
@@ -32,10 +33,18 @@ export default function PaymentsPage() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="text-2xl font-bold text-gray-900">Payments</h1>
+      <div className="flex items-center gap-2">
+        <CreditCard className="w-6 h-6 text-indigo-600" />
+        <h1 className="text-2xl font-bold text-gray-900">Payments</h1>
+      </div>
       <p className="mt-1 text-sm text-gray-500">Manage Stripe payment intents</p>
 
-      {error && <div className="mt-4 p-3 text-sm text-red-700 bg-red-50 rounded-lg border border-red-100">{error}</div>}
+      {error && (
+        <div className="mt-4 p-3 text-sm text-red-700 bg-red-50 rounded-lg border border-red-100 flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
+          <span>{error}</span>
+        </div>
+      )}
 
       {/* Create Payment Intent */}
       <div className="bg-white p-6 rounded-xl border border-gray-100 mt-6">
@@ -59,15 +68,19 @@ export default function PaymentsPage() {
             </div>
           </div>
           <button type="submit" disabled={loading}
-            className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 disabled:opacity-50 transition">
-            {loading ? 'Creating...' : 'Create Payment Intent'}
+            className="flex items-center gap-2 px-6 py-2.5 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 disabled:opacity-50 transition">
+            <CreditCard className="w-4 h-4" />
+            <span>{loading ? 'Creating...' : 'Create Payment Intent'}</span>
           </button>
         </form>
 
         {result && (
-          <div className="mt-4 p-4 bg-green-50 rounded-lg border border-green-100">
-            <p className="text-sm font-medium text-green-700">✓ Payment Intent Created!</p>
-            <p className="mt-1 text-xs text-green-600 break-all">ID: {result.id || JSON.stringify(result)}</p>
+          <div className="mt-4 p-4 bg-green-50 rounded-lg border border-green-100 flex items-start gap-3">
+            <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-medium text-green-700">Payment Intent Created!</p>
+              <p className="mt-1 text-xs text-green-600 break-all">ID: {result.id || JSON.stringify(result)}</p>
+            </div>
           </div>
         )}
       </div>

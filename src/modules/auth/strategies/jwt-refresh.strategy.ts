@@ -17,7 +17,10 @@ export class JwtRefreshStrategy extends PassportStrategy(
     super({
       jwtFromRequest: ExtractJwt.fromBodyField("refreshToken"),
       ignoreExpiration: false,
-      secretOrKey: configService.get<string>("jwt.refreshSecret"),
+      secretOrKey:
+        configService.get<string>("jwt.refreshSecret") ||
+        configService.get<string>("JWT_REFRESH_SECRET") ||
+        "super_secret_jwt_refresh_key",
       passReqToCallback: true,
     });
   }
@@ -28,7 +31,6 @@ export class JwtRefreshStrategy extends PassportStrategy(
     if (!user) {
       throw new UnauthorizedException();
     }
-    // Validation of hashed refresh token would go here
     return { ...user.toObject(), refreshToken };
   }
 }

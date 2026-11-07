@@ -1,5 +1,5 @@
 export default () => ({
-  port: parseInt(process.env.PORT, 10) || 3000,
+  port: parseInt(process.env.PORT, 10) || 5000,
   apiPrefix: process.env.API_PREFIX || "/api/v1",
   clientUrl: process.env.CLIENT_URL || "http://localhost:3000",
   database: {
@@ -8,10 +8,14 @@ export default () => ({
       "mongodb://localhost:27017/nestjs_saas_boilerplate",
   },
   jwt: {
-    accessSecret: process.env.JWT_ACCESS_SECRET || "access_secret",
+    accessSecret: process.env.JWT_ACCESS_SECRET || "super_secret_jwt_access_key",
     accessExpiration: process.env.JWT_ACCESS_EXPIRATION || "15m",
-    refreshSecret: process.env.JWT_REFRESH_SECRET || "refresh_secret",
+    refreshSecret: process.env.JWT_REFRESH_SECRET || "super_secret_jwt_refresh_key",
     refreshExpiration: process.env.JWT_REFRESH_EXPIRATION || "7d",
+  },
+  throttle: {
+    ttl: parseInt(process.env.THROTTLE_TTL, 10) || 60,
+    limit: parseInt(process.env.THROTTLE_LIMIT, 10) || 100,
   },
   aws: {
     region: process.env.AWS_REGION,

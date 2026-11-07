@@ -32,7 +32,7 @@ export class UploadService {
     if (!this.s3 || !bucketName) {
       this.logger.warn('AWS S3 credentials not fully configured. Returning simulated local file URL.');
       return {
-        url: `http://localhost:3000/uploads/${fileKey}`,
+        url: `http://localhost:5000/uploads/${fileKey}`,
         key: fileKey,
       };
     }

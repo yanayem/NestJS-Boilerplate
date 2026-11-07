@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import api from '@/utils/api';
+import { Lock, Trash2, Users } from 'lucide-react';
 
 export default function UsersPage() {
   const [users, setUsers] = useState<any[]>([]);
@@ -30,7 +31,9 @@ export default function UsersPage() {
   if (loading) return <div className="text-center py-12 text-gray-400">Loading...</div>;
   if (error) return (
     <div className="flex flex-col items-center justify-center py-20">
-      <span className="text-5xl mb-4">🔒</span>
+      <div className="w-16 h-16 flex items-center justify-center rounded-full bg-red-50 text-red-600 mb-4">
+        <Lock className="w-8 h-8" />
+      </div>
       <h2 className="text-xl font-bold text-gray-900">{error}</h2>
       <p className="mt-1 text-sm text-gray-500">You need admin privileges to view this page.</p>
     </div>
@@ -38,7 +41,10 @@ export default function UsersPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
+      <div className="flex items-center gap-2">
+        <Users className="w-6 h-6 text-indigo-600" />
+        <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
+      </div>
       <p className="mt-1 text-sm text-gray-500">{users.length} users found</p>
 
       <div className="bg-white rounded-xl border border-gray-100 mt-6 overflow-hidden">
@@ -70,8 +76,9 @@ export default function UsersPage() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <button onClick={() => handleDelete(u._id)}
-                      className="px-3 py-1 text-xs font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition">
-                      Delete
+                      className="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition">
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Delete</span>
                     </button>
                   </td>
                 </tr>

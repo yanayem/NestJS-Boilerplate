@@ -55,7 +55,8 @@ async function bootstrap() {
   // Start Server
   const port = configService.get<number>("port") || 3000;
   await app.listen(port);
-  console.log(`Application is running on: ${await app.getUrl()}/${apiPrefix}`);
+  const normalizedPrefix = apiPrefix.startsWith("/") ? apiPrefix : `/${apiPrefix}`;
+  console.log(`Application is running on: ${await app.getUrl()}${normalizedPrefix}`);
   console.log(`Frontend UI Dashboard available at: ${await app.getUrl()}`);
   console.log(`Swagger OpenAPI available at: ${await app.getUrl()}/docs`);
 }

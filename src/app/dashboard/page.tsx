@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import api from '@/utils/api';
+import { Users, FolderUp, CreditCard, Mail, User, Sparkles } from 'lucide-react';
 
 export default function DashboardPage() {
   const [user, setUser] = useState<any>(null);
@@ -11,49 +12,55 @@ export default function DashboardPage() {
   }, []);
 
   const stats = [
-    { label: 'Total Users', value: '128', icon: '👥', color: 'bg-blue-50 text-blue-700' },
-    { label: 'Uploads', value: '56', icon: '📁', color: 'bg-green-50 text-green-700' },
-    { label: 'Payments', value: '$2,450', icon: '💳', color: 'bg-purple-50 text-purple-700' },
-    { label: 'Emails Sent', value: '342', icon: '📧', color: 'bg-amber-50 text-amber-700' },
+    { label: 'Total Users', value: '128', icon: Users, color: 'bg-blue-50 text-blue-700' },
+    { label: 'Uploads', value: '56', icon: FolderUp, color: 'bg-green-50 text-green-700' },
+    { label: 'Payments', value: '$2,450', icon: CreditCard, color: 'bg-purple-50 text-purple-700' },
+    { label: 'Emails Sent', value: '342', icon: Mail, color: 'bg-amber-50 text-amber-700' },
   ];
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900">
-        Welcome back{user?.name ? `, ${user.name}` : ''} 👋
-      </h1>
+      <div className="flex items-center gap-2">
+        <h1 className="text-2xl font-bold text-gray-900">
+          Welcome back{user?.name ? `, ${user.name}` : ''}
+        </h1>
+        <Sparkles className="w-5 h-5 text-amber-500" />
+      </div>
       <p className="mt-1 text-sm text-gray-500">Here&apos;s what&apos;s happening with your app today.</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-        {stats.map((s, i) => (
-          <div key={i} className="bg-white p-5 rounded-xl border border-gray-100 hover:shadow-md transition">
-            <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg text-lg ${s.color}`}>
-              {s.icon}
+        {stats.map((s, i) => {
+          const Icon = s.icon;
+          return (
+            <div key={i} className="bg-white p-5 rounded-xl border border-gray-100 hover:shadow-md transition">
+              <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg text-lg ${s.color}`}>
+                <Icon className="w-5 h-5" />
+              </div>
+              <p className="mt-3 text-2xl font-bold text-gray-900">{s.value}</p>
+              <p className="text-sm text-gray-500">{s.label}</p>
             </div>
-            <p className="mt-3 text-2xl font-bold text-gray-900">{s.value}</p>
-            <p className="text-sm text-gray-500">{s.label}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
         <div className="bg-white p-6 rounded-xl border border-gray-100">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
           <div className="grid grid-cols-2 gap-3">
-            <a href="/dashboard/users" className="p-4 bg-indigo-50 rounded-lg text-center hover:bg-indigo-100 transition">
-              <span className="text-2xl">👥</span>
+            <a href="/dashboard/users" className="flex flex-col items-center p-4 bg-indigo-50 rounded-lg text-center hover:bg-indigo-100 transition">
+              <Users className="w-6 h-6 text-indigo-700" />
               <p className="mt-2 text-sm font-medium text-indigo-700">Manage Users</p>
             </a>
-            <a href="/dashboard/upload" className="p-4 bg-green-50 rounded-lg text-center hover:bg-green-100 transition">
-              <span className="text-2xl">📁</span>
+            <a href="/dashboard/upload" className="flex flex-col items-center p-4 bg-green-50 rounded-lg text-center hover:bg-green-100 transition">
+              <FolderUp className="w-6 h-6 text-green-700" />
               <p className="mt-2 text-sm font-medium text-green-700">Upload Files</p>
             </a>
-            <a href="/dashboard/payments" className="p-4 bg-purple-50 rounded-lg text-center hover:bg-purple-100 transition">
-              <span className="text-2xl">💳</span>
+            <a href="/dashboard/payments" className="flex flex-col items-center p-4 bg-purple-50 rounded-lg text-center hover:bg-purple-100 transition">
+              <CreditCard className="w-6 h-6 text-purple-700" />
               <p className="mt-2 text-sm font-medium text-purple-700">Payments</p>
             </a>
-            <a href="/dashboard/profile" className="p-4 bg-amber-50 rounded-lg text-center hover:bg-amber-100 transition">
-              <span className="text-2xl">👤</span>
+            <a href="/dashboard/profile" className="flex flex-col items-center p-4 bg-amber-50 rounded-lg text-center hover:bg-amber-100 transition">
+              <User className="w-6 h-6 text-amber-700" />
               <p className="mt-2 text-sm font-medium text-amber-700">My Profile</p>
             </a>
           </div>

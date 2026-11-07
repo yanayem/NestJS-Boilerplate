@@ -39,28 +39,47 @@ export class AuthService {
 
   async refreshTokens(userId: string, refreshToken: string) {
     const user = await this.usersService.findOne(userId);
-    // You should verify the hashed refresh token here if you store it in DB
     return this.generateTokens(user);
   }
 
   private async generateTokens(user: UserDocument) {
     const payload = { sub: user._id, email: user.email, role: user.role };
 
+    const accessSecret =
+      this.configService.get<string>("jwt.accessSecret") ||
+      this.configService.get<string>("JWT_ACCESS_SECRET") ||
+      "super_secret_jwt_access_key";
+    const accessExpiration =
+      this.configService.get<string>("jwt.accessExpiration") ||
+      this.configService.get<string>("JWT_ACCESS_EXPIRATION") ||
+      "15m";
+
+    const refreshSecret =
+      this.configService.get<string>("jwt.refreshSecret") ||
+      this.configService.get<string>("JWT_REFRESH_SECRET") ||
+      "super_secret_jwt_refresh_key";
+    const refreshExpiration =
+      this.configService.get<string>("jwt.refreshExpiration") ||
+      this.configService.get<string>("JWT_REFRESH_EXPIRATION") ||
+      "7d";
+
     const [accessToken, refreshToken] = await Promise.all([
-      this.jwtService.signAsync(payload),
       this.jwtService.signAsync(payload, {
-        secret: this.configService.get<string>("jwt.refreshSecret"),
-        expiresIn: this.configService.get<string>("jwt.refreshExpiration"),
+        secret: accessSecret,
+        expiresIn: accessExpiration,
+      }),
+      this.jwtService.signAsync(payload, {
+        secret: refreshSecret,
+        expiresIn: refreshExpiration,
       }),
     ]);
 
-    // Optional: save hashed refreshToken to user document
     const salt = await bcrypt.genSalt(10);
     const hashedRefreshToken = await bcrypt.hash(refreshToken, salt);
-    await this.usersService.update(user._id.toString(), {
-      ...user.toObject(),
+    await this.usersService.updateHashedRefreshToken(
+      user._id.toString(),
       hashedRefreshToken,
-    } as any);
+    );
 
     return {
       accessToken,
@@ -69,7 +88,7 @@ export class AuthService {
     };
   }
 
-  googleLogin(req) {
+  googleLogin(req: any) {
     if (!req.user) {
       return "No user from google";
     }

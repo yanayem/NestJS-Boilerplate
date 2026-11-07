@@ -3,7 +3,9 @@
   "compilerOptions": {
     "noEmit": false,
     "module": "commonjs",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "outDir": "./dist"
   },
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist", "test", "**/*spec.ts", "src/app/**/*", "src/components/**/*", "src/utils/**/*"]
 }

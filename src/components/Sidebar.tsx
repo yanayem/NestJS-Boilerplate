@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { LayoutDashboard, User, Users, FolderUp, CreditCard } from 'lucide-react';
 
 const menuItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: '📊' },
-  { href: '/dashboard/profile', label: 'Profile', icon: '👤' },
-  { href: '/dashboard/users', label: 'Users', icon: '👥' },
-  { href: '/dashboard/upload', label: 'Upload', icon: '📁' },
-  { href: '/dashboard/payments', label: 'Payments', icon: '💳' },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/dashboard/profile', label: 'Profile', icon: User },
+  { href: '/dashboard/users', label: 'Users', icon: Users },
+  { href: '/dashboard/upload', label: 'Upload', icon: FolderUp },
+  { href: '/dashboard/payments', label: 'Payments', icon: CreditCard },
 ];
 
 export default function Sidebar() {
@@ -19,6 +20,7 @@ export default function Sidebar() {
       <ul className="space-y-1">
         {menuItems.map((item) => {
           const isActive = pathname === item.href;
+          const Icon = item.icon;
           return (
             <li key={item.href}>
               <Link
@@ -29,8 +31,8 @@ export default function Sidebar() {
                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`}
               >
-                <span>{item.icon}</span>
-                {item.label}
+                <Icon className="w-5 h-5" />
+                <span>{item.label}</span>
               </Link>
             </li>
           );
