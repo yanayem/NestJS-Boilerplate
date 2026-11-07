@@ -1,174 +1,212 @@
-# 🚀 Ultimate NestJS & MongoDB SaaS Boilerplate
+# 🚀 Ultimate NestJS & Next.js SaaS Boilerplate
 
 [![NestJS](https://img.shields.io/badge/NestJS-v10-red.svg)](https://nestjs.com/)
+[![Next.js](https://img.shields.io/badge/Next.js-v15-black.svg)](https://nextjs.org/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose-green.svg)](https://mongoosejs.com/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
-[![License](https://img.shields.io/badge/License-Commercial-brightgreen.svg)]()
+[![TypeScript](https://img.shields.io/badge/TypeScript-v5-blue.svg)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-blueviolet.svg)](https://tailwindcss.com/)
+[![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)]()
 
-> A production-ready, highly secure, and modular backend boilerplate for building scalable SaaS applications.
-
----
-
-## 🌟 2. Key Features
-
-* **Robust Authentication**: JWT Access/Refresh Tokens (hashed tokens stored in DB for extra security).
-* **Role-Based Authorization (RBAC)**: Fine-grained access control with `ADMIN`, `MANAGER`, and `USER` roles.
-* **Database Management**: MongoDB integration using Mongoose with pre-configured schemas and automated **Soft Delete** (`isDeleted: true`).
-* **Security & DDoS Protection**: Helmet security headers, CORS enabled, and Rate Limiting (Throttling) activated.
-* **Cloud File Upload**: Ready-to-use AWS S3 file upload module with public URL generation.
-* **Email Service**: Built-in Nodemailer support with HTML templates for welcome emails and password reset tokens.
-* **Payment Gateway**: Integrated Stripe Payment Intent creation API and asynchronous webhook handling.
-* **Interactive Frontend Dashboard**: Built-in Tailwind CSS web interface (`http://localhost:3000/`) for live API testing out-of-the-box.
+> A production-ready, highly secure, modular full-stack SaaS boilerplate with NestJS backend, Next.js 15 frontend, MongoDB database, AWS S3 integration, Stripe payments, Nodemailer, and JWT Role-Based Access Control (RBAC).
 
 ---
 
-## 💻 3. Tech Stack
+## 📌 Table of Contents
 
-* **Framework**: NestJS (v10+)
-* **Language**: TypeScript
-* **Database**: MongoDB
-* **ODM**: Mongoose
-* **Security & Auth**: Passport.js, JWT, Bcrypt, Helmet, Throttler
-* **Storage**: AWS S3 SDK
-* **Mailer**: Nodemailer
-* **Payment Gateway**: Stripe API
-* **UI & Style**: Tailwind CSS
-
----
-
-## 📋 4. Prerequisites
-
-Before running the application, make sure you have the following installed:
-
-* **Node.js**: `v18.0.0` or higher
-* **NPM**: `v9.0.0` or higher (or Yarn/PNPM)
-* **MongoDB**: Local MongoDB instance or MongoDB Atlas cluster URL
+- [🌟 Features](#-features)
+- [💻 Tech Stack](#-tech-stack)
+- [📂 Folder Structure](#-folder-structure)
+- [📋 Prerequisites](#-prerequisites)
+- [🚀 Quick Start & Installation](#-quick-start--installation)
+- [⚙️ Environment Configuration (.env)](#️-environment-configuration-env)
+- [🔑 Authentication & Authorization](#-authentication--authorization)
+- [📌 Main API Endpoints](#-main-api-endpoints)
+- [📚 User & Developer Documentation](#-user--developer-documentation)
+- [📩 Contact & Support](#-contact--support)
 
 ---
 
-## 🚀 5. Getting Started & Installation
+## 🌟 Features
 
-Follow these simple steps to run the application locally:
-
-```bash
-# 1. Clone or extract the project repository
-cd NestJS-Boilerplate
-
-# 2. Install dependencies
-npm install
-
-# 3. Create environment file from sample
-cp .env.example .env
-
-# 4. Start the application in development mode with hot reload
-npm run start:dev
-```
-
-For production deployment:
-```bash
-# Build the project
-npm run build
-
-# Start production server
-npm run start:prod
-```
+* **🔐 Robust Auth System**: JWT Access & Refresh Tokens (with hashed refresh token storage in MongoDB for ultimate security).
+* **🌐 Google OAuth 2.0**: Out-of-the-box Google OAuth login strategy.
+* **🛡️ Role-Based Access Control (RBAC)**: Enforced permissions across `ADMIN`, `MANAGER`, and `USER` roles using NestJS Guards & Decorators.
+* **🍃 MongoDB & Mongoose**: Fully typed database models with automated **Soft Delete** (`isDeleted: true`) capabilities.
+* **☁️ AWS S3 File Upload**: Pre-configured file upload module using AWS SDK with secure URL generation.
+* **📧 Email Dispatcher**: Integrated Nodemailer module with HTML templates for welcome emails, password resets, and notifications.
+* **💳 Stripe Payments & Webhooks**: Integrated Stripe Payment Intent creation and async webhook event listener.
+* **⚡ Modern Next.js 15 Frontend**: Built-in interactive Web UI Dashboard styled with Tailwind CSS v4.
+* **📖 Interactive Swagger OpenAPI**: Built-in interactive API docs at `http://localhost:3000/docs`.
+* **🛡️ Production Security**: Helmet security headers, CORS protection, global `ValidationPipe`, and Rate Limiting (Throttling).
 
 ---
 
-## ⚙️ 6. Environment Variable Guide (.env)
+## 💻 Tech Stack
 
-Below is the detailed description for every key in your `.env` configuration file:
+### Backend
+- **Framework**: NestJS (v10)
+- **Language**: TypeScript
+- **Database**: MongoDB with Mongoose ODM
+- **Authentication**: Passport.js, JWT, Bcrypt, Google OAuth 2.0
+- **Storage**: AWS SDK (S3)
+- **Mailer**: Nodemailer
+- **Payments**: Stripe SDK
+- **Security**: Helmet, Throttler (Rate Limiting)
 
-| Key | Example Value | Description |
-| :--- | :--- | :--- |
-| `PORT` | `3000` | Port on which the application server runs |
-| `NODE_ENV` | `development` | Application environment (`development` or `production`) |
-| `APP_NAME` | `"SaaS Boilerplate"` | Name of your SaaS application |
-| `API_PREFIX` | `api/v1` | Global REST API prefix for all endpoints |
-| `MONGO_URI` | `mongodb://localhost:27017/nestjs-saas-db` | Your MongoDB connection string |
-| `JWT_SECRET` | `super_secret_jwt_access_key` | Secret key for signing JWT Access Tokens |
-| `JWT_EXPIRATION` | `15m` | Expiration time for Access Tokens |
-| `JWT_REFRESH_SECRET` | `super_secret_jwt_refresh_key` | Secret key for signing Refresh Tokens |
-| `JWT_REFRESH_EXPIRATION` | `7d` | Expiration time for Refresh Tokens |
-| `MAIL_HOST` | `smtp.mailtrap.io` | SMTP host address for Nodemailer |
-| `MAIL_PORT` | `2525` | SMTP port number |
-| `MAIL_USER` | `your_smtp_username` | SMTP username |
-| `MAIL_PASS` | `your_smtp_password` | SMTP password |
-| `MAIL_FROM` | `"SaaS App <no-reply@saasapp.com>"` | Sender email header |
-| `AWS_REGION` | `us-east-1` | AWS region for S3 bucket |
-| `AWS_ACCESS_KEY_ID` | `your_aws_access_key_id` | AWS IAM Access Key ID |
-| `AWS_SECRET_ACCESS_KEY` | `your_aws_secret_access_key` | AWS IAM Secret Access Key |
-| `AWS_S3_BUCKET_NAME` | `your_s3_bucket_name` | AWS S3 Bucket Name |
-| `STRIPE_SECRET_KEY` | `sk_test_your_stripe_secret_key` | Stripe API Secret Key |
-| `STRIPE_WEBHOOK_SECRET` | `whsec_your_stripe_webhook_secret` | Stripe Webhook Listener Secret |
-| `THROTTLE_TTL` | `60` | Rate limiting time window in seconds |
-| `THROTTLE_LIMIT` | `100` | Maximum requests permitted per window |
+### Frontend
+- **Framework**: Next.js (v15) & React 19
+- **Styling**: Tailwind CSS (v4) & Lucide Icons
 
 ---
 
-## 📂 7. Project Folder Structure
+## 📂 Folder Structure
 
 ```text
-nestjs-saas-boilerplate/
-├── src/
-│   ├── config/                 # Environment variables & configuration loaders
-│   ├── common/                 # Shared decorators, enums, guards, filters & interceptors
+nestjs-mongodb-saas-boilerplate/
+├── public/                     # Static assets & dashboard files
+├── src/                        # NestJS Backend source code
+│   ├── config/                 # App configuration & loader
+│   ├── common/                 # Decorators, Enums, Filters, Guards & Interceptors
 │   │   ├── decorators/         # Custom decorators (@GetUser, @Roles)
 │   │   ├── enums/              # System Enums (Role: ADMIN, MANAGER, USER)
-│   │   ├── filters/            # Global Exception Filter
-│   │   ├── guards/             # JWT Auth, Refresh Token & Roles Guards
+│   │   ├── filters/            # Global Exception Filters
+│   │   ├── guards/             # JwtAuthGuard, RefreshTokenGuard, RolesGuard
 │   │   └── interceptors/       # Response Transform Interceptor
-│   ├── modules/                # Main business logic divided into modules
-│   │   ├── auth/               # Auth controller, service, strategies (JWT, Refresh)
-│   │   ├── users/              # User CRUD, schemas, soft-delete service
-│   │   ├── upload/             # AWS S3 file upload logic
-│   │   ├── mail/               # Email templates and dispatching logic
-│   │   └── payment/            # Stripe payment handling & webhooks
+│   ├── modules/                # Core Business Logic Modules
+│   │   ├── auth/               # Auth controller, service, JWT & Google strategies
+│   │   ├── users/              # User management, CRUD & soft delete
+│   │   ├── upload/             # AWS S3 file upload module
+│   │   ├── mail/               # Nodemailer service & email dispatch
+│   │   └── payment/            # Stripe payment intent & webhook handling
 │   ├── app.controller.ts       # Health check controller
-│   ├── app.module.ts           # Main application module
-│   └── main.ts                 # Entry point (Helmet, ValidationPipe, Swagger setup)
-├── public/
-│   └── index.html              # Interactive Tailwind CSS Web Dashboard
-├── .env.example                # Pre-configured sample environment file
-└── README.md                   # Project documentation
+│   ├── app.module.ts           # Root module
+│   └── main.ts                 # Entry point (Pipes, Filters, Swagger, Helmet)
+├── .env.example                # Sample environment variables file
+├── README.md                   # Quick overview documentation
+├── DOCUMENTATION.md            # Comprehensive Developer Documentation
+└── USER_GUIDE.md               # User & Setup Step-by-Step Guide
 ```
 
 ---
 
-## 📌 8. Main API Endpoints Overview
+## 📋 Prerequisites
 
-| Method | Endpoint | Access Control | Description |
+Before getting started, make sure you have installed:
+
+- **Node.js**: `v18.0.0` or higher
+- **NPM**: `v9.0.0` or higher
+- **MongoDB**: Local MongoDB instance (`mongodb://localhost:27017`) or MongoDB Atlas Cluster URL
+
+---
+
+## 🚀 Quick Start & Installation
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/yanayem/NestJS-Boilerplate.git
+cd NestJS-Boilerplate
+```
+
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Setup environment variables
+Copy the example `.env` file and update your configuration settings:
+```bash
+cp .env.example .env
+```
+
+### 4. Run Development Mode (Full Stack)
+Run both backend and frontend concurrently with hot reload:
+```bash
+npm run dev
+```
+Alternatively, to run only backend watch mode:
+```bash
+npm run dev:backend
+```
+
+### 5. Access Application URLs
+- 🌐 **Frontend Dashboard**: `http://localhost:3000`
+- 📚 **Swagger API Docs**: `http://localhost:3000/docs`
+- 📡 **API Base Route**: `http://localhost:3000/api/v1`
+
+---
+
+## ⚙️ Environment Configuration (.env)
+
+| Environment Variable | Description | Default / Example Value |
+| :--- | :--- | :--- |
+| `PORT` | HTTP Server Port | `3000` |
+| `NODE_ENV` | Application Environment | `development` |
+| `APP_NAME` | SaaS Application Name | `"SaaS Boilerplate"` |
+| `API_PREFIX` | Global API route prefix | `api/v1` |
+| `MONGO_URI` | MongoDB Connection URI | `mongodb://localhost:27017/nestjs-saas-db` |
+| `JWT_SECRET` | Secret key for Access Token | `super_secret_jwt_access_key` |
+| `JWT_EXPIRATION` | Expiration time for Access Token | `15m` |
+| `JWT_REFRESH_SECRET` | Secret key for Refresh Token | `super_secret_jwt_refresh_key` |
+| `JWT_REFRESH_EXPIRATION` | Expiration time for Refresh Token | `7d` |
+| `MAIL_HOST` | SMTP Host for Nodemailer | `smtp.mailtrap.io` |
+| `MAIL_PORT` | SMTP Port | `2525` |
+| `MAIL_USER` | SMTP Username | `your_smtp_user` |
+| `MAIL_PASS` | SMTP Password | `your_smtp_password` |
+| `MAIL_FROM` | Default sender email address | `"SaaS App <no-reply@saasapp.com>"` |
+| `AWS_REGION` | AWS Region for S3 Bucket | `us-east-1` |
+| `AWS_ACCESS_KEY_ID` | AWS IAM Access Key ID | `your_aws_access_key` |
+| `AWS_SECRET_ACCESS_KEY` | AWS IAM Secret Key | `your_aws_secret_key` |
+| `AWS_S3_BUCKET_NAME` | AWS S3 Bucket Name | `your_s3_bucket_name` |
+| `STRIPE_SECRET_KEY` | Stripe API Secret Key | `sk_test_...` |
+| `STRIPE_WEBHOOK_SECRET` | Stripe Webhook Signing Secret | `whsec_...` |
+| `THROTTLE_TTL` | Rate limiting window (seconds) | `60` |
+| `THROTTLE_LIMIT` | Max requests permitted per window | `100` |
+
+---
+
+## 🔑 Authentication & Authorization
+
+All secure endpoints require a Bearer token in the request header:
+```text
+Authorization: Bearer <your_access_token>
+```
+
+### Roles Breakdown:
+- **`USER`**: Can view and update their own profile data, upload files, and make payments.
+- **`MANAGER`**: Can list all users, view non-deleted profiles, and perform operational user tasks.
+- **`ADMIN`**: Full administrative privileges, including soft-deleting user accounts (`isDeleted: true`).
+
+---
+
+## 📌 Main API Endpoints
+
+| Method | Endpoint | Authorization | Description |
 | :--- | :--- | :--- | :--- |
-| **POST** | `/api/v1/auth/register` | Public | Register new user & return access/refresh tokens |
-| **POST** | `/api/v1/auth/login` | Public | Authenticate credentials & return tokens |
-| **POST** | `/api/v1/auth/refresh` | Refresh Token | Issue fresh access token via refresh token |
-| **POST** | `/api/v1/auth/logout` | Bearer JWT | Logout user & invalidate refresh token |
-| **GET** | `/api/v1/users/me` | Bearer JWT | Retrieve logged-in user profile |
-| **GET** | `/api/v1/users` | Admin & Manager | List all non-deleted user records |
-| **GET** | `/api/v1/users/:id` | Bearer JWT | Find user by ID |
-| **PATCH** | `/api/v1/users/:id` | Bearer JWT / Self | Update profile information |
-| **DELETE**| `/api/v1/users/:id` | Admin Only | Soft delete user record (`isDeleted: true`) |
-| **POST** | `/api/v1/upload` | Bearer JWT | Upload single file to AWS S3 bucket |
+| **POST** | `/api/v1/auth/register` | Public | Register new user & issue JWT tokens |
+| **POST** | `/api/v1/auth/login` | Public | Log in user & receive Access/Refresh tokens |
+| **POST** | `/api/v1/auth/refresh` | Refresh Token | Issue a new Access Token |
+| **POST** | `/api/v1/auth/logout` | Bearer JWT | Log out & clear refresh token |
+| **GET** | `/api/v1/users/me` | Bearer JWT | Retrieve currently authenticated profile |
+| **GET** | `/api/v1/users` | Admin & Manager | Retrieve all user records |
+| **GET** | `/api/v1/users/:id` | Bearer JWT | Retrieve user by ID |
+| **PATCH** | `/api/v1/users/:id` | Bearer JWT | Update user profile |
+| **DELETE**| `/api/v1/users/:id` | Admin Only | Soft delete user (`isDeleted: true`) |
+| **POST** | `/api/v1/upload` | Bearer JWT | Upload single file to AWS S3 |
 | **POST** | `/api/v1/payment/create-intent` | Bearer JWT | Generate Stripe Payment Intent |
-| **POST** | `/api/v1/payment/webhook` | Public | Stripe webhook listener |
+| **POST** | `/api/v1/payment/webhook` | Public | Handle Stripe payment events |
 
 ---
 
-## 💡 Live Interactive Demo & Documentation (Value Booster)
+## 📚 User & Developer Documentation
 
-This project features built-in interactive surfaces that allow buyers to test request-response cycles before integrating into their frontend:
-
-- 🌐 **Interactive Web UI Dashboard**: `http://localhost:3000/`
-- 📚 **Swagger OpenAPI Interactive Documentation**: `http://localhost:3000/docs`
-- 🔗 **GitHub Repository**: [https://github.com/yanayem/NestJS-Boilerplate](https://github.com/yanayem/NestJS-Boilerplate)
+- 📘 **[USER_GUIDE.md](./USER_GUIDE.md)**: Detailed step-by-step user guide for installation, testing APIs, authentication, AWS S3 setup, and Stripe payment integration.
+- 🛠️ **[DOCUMENTATION.md](./DOCUMENTATION.md)**: Complete developer documentation explaining architecture, data flow, guards, interceptors, and error handling.
 
 ---
 
-## 📩 Buyer Support & Customization Contact
+## 📩 Contact & Support
 
-For technical assistance, custom feature development, or project inquiries:
+For questions, issues, or custom development requests, feel free to contact:
 
-* 📧 **Email**: [arafatnayem1@gmail.com](mailto:arafatnayem1@gmail.com)
-* 💼 **CodeCanyon Profile**: Contact via item support tab or email.
-
-*If you find this boilerplate helpful, please leave a 5-star rating on CodeCanyon!* ⭐⭐⭐⭐⭐
+- 📧 **Email**: [arafatnayem1@gmail.com](mailto:arafatnayem1@gmail.com)
+- 🌐 **GitHub Repository**: [yanayem/NestJS-Boilerplate](https://github.com/yanayem/NestJS-Boilerplate)
